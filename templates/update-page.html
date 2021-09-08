@@ -2,44 +2,30 @@
 {% block content %}
 <div class="main-content">
     <div class="new-article">
-        <form method="POST">
-            {# This hidden_tag is a CSRF security feature. #}
+        <form method="POST" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
-            <div class="title-wrapper input-wrapper flex-column">
+            <div class="title-wrapper__update input-wrapper flex-column">
                 {{ form.title.label() }}
                 {{form.title()  }}
             </div>
-            <div class="featured-article-wrapper input-wrapper">
-                {{ form.featured.label() }}
-                {{form.featured()  }}
+            <div class="author-wrapper__update input-wrapper flex-column">
+                {{ form.author.label() }}
+                {{form.author()  }}
             </div>
-            <!-- <div class="content-wrapper input-wrapper flex-column">
+            <div class="content-wrapper__update input-wrapper flex-column">
                 {{ form.content.label() }}
-                {{ form.content() }}
-            </div> -->
-            <div id="article-content" class="article-content"></div>
+                {{form.content(id="summernote")  }}
+            </div>
+            <div class="featured-article-wrapper input-wrapper flex-column">
+                {{form.featured()  }}
+                {{ form.featured.label() }}
+            </div>
 
-            <div class="submit-wrapper">
-                {{ form.submit() }}
+
+            <div class="submit-wrapper flex-column">
+                {{ form.submit(class="btn btn-primary") }}
             </div>
         </form>
     </div>
-    <section class="categorised-articles-container">
-        <div class="categorised-articles-container__articles-card">
-            <h2>Featured Articles</h2>
-            <div class="categorised-articles-container__articles-list">
-                {% for post in posts  %}
-                {% if post.featured %}
-                <div class="categorised-articles-container__single-article">
-                    <a class="categorised-articles-container__article-title"
-                        href="{{ url_for('article_page', id=post.id) }}">{{post.title}}</a>
-                    <span class="categorised-articles-container__article-publish-date">{{post.create_Date}}</span>
-                </div>
-                {% endif %}
-                {% endfor %}
-            </div>
-            <a class="categorised-articles-container__more-relative-articles" href="{{ url_for('index') }}">More ></a>
-        </div>
-    </section>
 </div>
 {% endblock %}

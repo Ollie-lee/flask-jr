@@ -1,109 +1,37 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>ray's blog | Add New Blog</title>
-    <!-- <link rel="icon" type="image/png" href="./assets/favicon.jpg" /> -->
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.jpg') }}" />
-
-
-    <!-- <link rel="stylesheet" href="./styles/add-page.css"> -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='add-page.css') }}">
-
-    <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet"
-        type="text/css" />
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js">
-    </script>
-</head>
-
-<body>
-    <header>
-        <div class="logo-area">
-            <a class="logo-area__logo" href="{{ url_for('index') }}">
-                <!-- <img src="./assets/logo.jpg"> -->
-                <img src="{{ url_for('static', filename='logo.jpg') }}">
-            </a>
-        </div>
-        <div class="menu-area">
-            <nav class="menu-area__nav">
-                <a class="menu-area__nav__nav-item" href="{{ url_for('add_page') }}">Add Post</a>
-            </nav>
-        </div>
-    </header>
-    <div class="main-content">
-        <div class="new-article">
-            <form method="POST">
-                {# This hidden_tag is a CSRF security feature. #}
-                {{ form.hidden_tag() }}
-                <div class="title-wrapper input-wrapper flex-column">
-                    {{ form.title.label() }}
-                    {{form.title()  }}
-                </div>
-                <div class="featured-article-wrapper input-wrapper">
-                    {{ form.featured.label(class_="featured-article") }}
-                    {{form.featured(class_="featured-article")  }}
-                </div>
-                <!-- <div class="content-wrapper input-wrapper flex-column">
-                    {{ form.content.label() }}
-                    {{ form.content() }}
-                </div> -->
-                <div id="article-content" class="article-content"></div>
-
-                <div class="submit-wrapper">
-                    {{ form.submit() }}
-                </div>
-            </form>
-        </div>
-        <section class="categorised-articles-container">
-            <div class="categorised-articles-container__articles-card">
-                <h2>Featured Articles</h2>
-                <div class="categorised-articles-container__articles-list">
-                    {% for post in posts  %}
-                    {% if post.featured %}
-                    <div class="categorised-articles-container__single-article">
-                        <a class="categorised-articles-container__article-title"
-                            href="{{ url_for('article_page', id=post.id) }}">{{post.title}}</a>
-                        <span class="categorised-articles-container__article-publish-date">{{post.create_Date}}</span>
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-                </div>
-                <a class="categorised-articles-container__more-relative-articles" href="{{ url_for('index') }}">More
-                    ></a>
+{% extends "base.html" %}
+{% block content %}
+<div class="main-content">
+    <div class="new-article">
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="title-wrapper input-wrapper flex-column">
+                <!-- <label for="title">Title:</label> -->
+                {{ form.title.label() }}
+                {{form.title()  }}
             </div>
-        </section>
+            <div class="author-wrapper input-wrapper flex-column">
+                <!-- <label for="author">Author:</label> -->
+                {{ form.author.label() }}
+                {{form.author()  }}
+            </div>
+            <div class="featured-article-wrapper input-wrapper flex-column">
+                {{form.featured()  }}
+                {{ form.featured.label() }}
+                <!-- <label for="featured">Featured Article?</label> -->
+            </div>
+            <div class="banner-image-wrapper input-wrapper flex-column">
+                <!-- <label for="banner_image">Banner Image:</label> -->
+                {{ form.banner_image.label() }}
+                {{form.banner_image()  }}
+            </div>
+            <div class="content-wrapper input-wrapper flex-column">
+                {{ form.content.label() }}
+                {{form.content(id="summernote")  }}
+            </div>
+            <div class="submit-wrapper flex-column">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
     </div>
-    <footer class="footer">
-        <div class="footer__top-area">
-            <div class="footer__logo-area">
-                <a class="footer__logo" href="{{ url_for('index') }}">
-                    <!-- <img src="./assets/logo.jpg"> -->
-                    <img src="{{ url_for('static', filename='logo.jpg') }}">
-                </a>
-            </div>
-            <div class="footer__menu-area">
-                <nav class="footer__nav">
-                    <a class="footer__nav-item" href="{{ url_for('add_page') }}">Add New Article</a>
-                </nav>
-            </div>
-        </div>
-        <div class="footer__bottom-area">
-            <span class="footer__copyright">©2021 ray's blog</span>
-            <div class="footer__media-links">
-                <a href="https://www.linkedin.com/in/xinran-ma/">
-                    <!-- <img src="./assets/linkedin.png"> -->
-                    <img src="{{ url_for('static', filename='linkedin.png') }}">
-
-                </a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        let editor = new FroalaEditor('#article-content');
-    </script>
-</body>
-
-</html>
+</div>
+{% endblock %}
