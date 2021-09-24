@@ -7,7 +7,7 @@ class AddForm(FlaskForm):
     title = StringField('Title of Post:', validators=[DataRequired()])
     content = TextAreaField('Content of Post:', validators=[DataRequired()])
     featured = BooleanField('Is featured')
-    submit = SubmitField('Submit Post')
+    submit = SubmitField('Submit Post')  
     
 class UpdateForm(FlaskForm):
     title = StringField('Title of Post:', validators=[DataRequired()])
