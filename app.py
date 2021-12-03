@@ -89,8 +89,10 @@ def add_page():
         editordata = form.content.data
         featured = form.featured.data
         author = form.author.data
-        banner_image = add_banner_pic(form.banner_image.data, title)
-
+        if form.banner_image.data:
+            banner_image = add_banner_pic(form.banner_image.data, title)
+        else:
+            banner_image = 'First post.jpg'
         # Add new post to database
         post = Post(title, editordata, featured, author, banner_image)
         db.session.add(post)
