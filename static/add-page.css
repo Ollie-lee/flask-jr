@@ -11,3 +11,9 @@
 .half-wrapper{
     display: flex;
 }
+
+@media only screen and (max-width: 767px) {
+.half-wrapper{
+    flex-direction: column;
+}
+}
