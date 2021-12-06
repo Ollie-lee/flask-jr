@@ -10,7 +10,13 @@
 
 .half-wrapper{
     display: flex;
+    width: 100%;
 }
+
+.half-wrapper > div{
+    flex: 1 1 50%;
+}
+
 
 @media only screen and (max-width: 767px) {
 .half-wrapper{
