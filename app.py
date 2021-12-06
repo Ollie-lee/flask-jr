@@ -122,6 +122,7 @@ def update_page(id):
         post.author = form.author.data
         post.editordata = form.content.data
         post.featured = form.featured.data
+        post.summary = form.summary.data
         if form.banner_image.data:
             post.banner_image = add_banner_pic(form.banner_image.data, post.title)
         db.session.commit()
@@ -132,6 +133,7 @@ def update_page(id):
         form.content.data = post.editordata
         form.featured.data = post.featured
         form.author.data = post.author
+        form.summary.data = post.summary
 
     return render_template('update-page.html', post=post, posts=posts, form=form)
 
