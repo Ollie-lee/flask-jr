@@ -30,6 +30,7 @@ class Post(db.Model):
     __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.Text)
+    summary = db.Column(db.Text)
     author = db.Column(db.Text)
     editordata = db.Column(db.Text)
     featured = db.Column(db.Boolean, default=True, nullable=False)
@@ -37,11 +38,12 @@ class Post(db.Model):
     banner_image = db.Column(
         db.String(64),  default='post-banner-01.jpg')
 
-    def __init__(self, title, editordata, featured, author, banner_image):
+    def __init__(self, title, editordata, featured, author, banner_image, summary):
         self.title = title
         self.editordata = editordata
         self.featured = featured
         self.author = author
+        self.summary = summary
         self.banner_image = banner_image
 
     def __repr__(self):
@@ -87,6 +89,7 @@ def add_page():
     if form.is_submitted():
         title = form.title.data
         editordata = form.content.data
+        summary = form.summary.data
         featured = form.featured.data
         author = form.author.data
         if form.banner_image.data:
@@ -94,7 +97,7 @@ def add_page():
         else:
             banner_image = 'First post.jpg'
         # Add new post to database
-        post = Post(title, editordata, featured, author, banner_image)
+        post = Post(title, editordata, featured, author, banner_image, summary)
         db.session.add(post)
         db.session.commit()
         return redirect(url_for('index'))

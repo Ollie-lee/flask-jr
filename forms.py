@@ -8,6 +8,7 @@ class AddForm(FlaskForm):
     title = StringField('Title of Post:', validators=[DataRequired()])
     author = StringField('Author of Post:', validators=[DataRequired()])
     content = TextAreaField('Content of Post:', validators=[DataRequired()])
+    summary = StringField('summary of Post:', validators=[DataRequired()])
     featured = BooleanField('Is featured')
     banner_image = FileField('Banner Image:', validators=[
                              FileAllowed(['jpg', 'png'])])

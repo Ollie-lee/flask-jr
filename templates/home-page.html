@@ -99,7 +99,7 @@
                     <a href="{{ url_for('article_page', id=post.id) }}">
                         <h3 class="article-list__article-title">{{post.title}}</h3>
                     </a>
-                    <p>{{post.editordata|safe}}</p>
+                    <p>{{post.summary}}</p>
                 </div>
             </article>
             {% endfor %}

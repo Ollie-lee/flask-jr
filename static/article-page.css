@@ -2,10 +2,10 @@
 @import "categorised-articles-container.css";
 @import "article-details.css";
 
-.main-content {
+.main-content-article {
   display: flex;
   max-width: 80rem;
-  margin: 0 auto;
+
 }
 .main-content__delete {
   min-height: 250px;
@@ -17,9 +17,10 @@
 }
 
 @media only screen and (max-width: 767px) {
-  .main-content {
+  .main-content-article {
     flex-direction: column;
     padding: 0 20px;
+    margin: 0 auto;
   }
 }
 

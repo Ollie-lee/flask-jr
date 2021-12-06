@@ -16,7 +16,10 @@
                 {{form.author()  }}
                 </div>
             </div>
-
+            <div class="title-wrapper input-wrapper flex-column">
+                {{ form.summary.label() }}
+                {{form.summary()  }}
+            </div>
             <div class="featured-article-wrapper input-wrapper flex-column">
                 {{form.featured()  }}
                 {{ form.featured.label() }}
